@@ -1,4 +1,5 @@
 import Blog from "@/components/sections/blog";
+import Carrousel from "@/components/sections/carrousel";
 import CTA from "@/components/sections/cta";
 import FAQ from "@/components/sections/faq";
 import Features from "@/components/sections/features";
@@ -19,6 +20,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Logos />
+      <Carrousel name="home" />
       <Problem />
       <Solution />
       <HowItWorks />
