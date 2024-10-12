@@ -33,3 +33,10 @@ model CarrouselPart {
   description   String
   order         Int
 }
+
+model DynamicText {
+  id          String @id
+  title       String
+  subtitle    String
+  description String
+}

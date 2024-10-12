@@ -60,6 +60,26 @@ async function main() {
     skipDuplicates: true,
   });
 
+  const deleteDynamicTexts = await prisma.dynamicText.deleteMany({
+    where: {
+      id: {
+        in: ["home"],
+      },
+    },
+  });
+
+  const DynamicTexts = await prisma.dynamicText.createMany({
+    data: [
+      {
+        id: "home",
+        title: "Welcome to our store",
+        subtitle: "Mega Subtitle that should show in font 36",
+        description: "We are a company that sells watches 2",
+      },
+    ],
+    skipDuplicates: true,
+  });
+
 }
 
 main()

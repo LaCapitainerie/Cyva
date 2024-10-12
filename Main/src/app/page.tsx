@@ -1,6 +1,7 @@
 import Blog from "@/components/sections/blog";
 import Carrousel from "@/components/sections/carrousel";
 import CTA from "@/components/sections/cta";
+import { DynamicSection } from "@/components/sections/dynamic-text";
 import FAQ from "@/components/sections/faq";
 import Features from "@/components/sections/features";
 import Footer from "@/components/sections/footer";
@@ -20,7 +21,9 @@ export default function Home() {
       <Header />
       <Hero />
       <Logos />
-      <Carrousel name="home" />
+      <DynamicSection id="home">
+        <Carrousel name="home" />
+      </DynamicSection>
       <Problem />
       <Solution />
       <HowItWorks />
