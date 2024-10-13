@@ -40,3 +40,11 @@ model DynamicText {
   subtitle    String
   description String
 }
+
+model Question {
+  id          String @id
+  question    String
+  answer      String
+  order       Int
+  published   Boolean
+}

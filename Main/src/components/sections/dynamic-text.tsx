@@ -11,15 +11,11 @@ export async function DynamicSection({ id, children }: DynamicTextProps) {
 
     const prisma = new PrismaClient();
 
-    console.log(await prisma.dynamicText.findMany());
-
     const dynamicText = await prisma.dynamicText.findUnique({
         where: {
             id: id,
         },
     });
-
-    prisma.$disconnect();
 
     if (!dynamicText) {
         return <Section title="Error" subtitle={`${id}`} description="Dynamic text not found" />;

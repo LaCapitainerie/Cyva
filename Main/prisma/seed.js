@@ -60,14 +60,6 @@ async function main() {
     skipDuplicates: true,
   });
 
-  const deleteDynamicTexts = await prisma.dynamicText.deleteMany({
-    where: {
-      id: {
-        in: ["home"],
-      },
-    },
-  });
-
   const DynamicTexts = await prisma.dynamicText.createMany({
     data: [
       {
@@ -75,6 +67,33 @@ async function main() {
         title: "Welcome to our store",
         subtitle: "Mega Subtitle that should show in font 36",
         description: "We are a company that sells watches 2",
+      },
+    ],
+    skipDuplicates: true,
+  });
+
+  const FAQ = await prisma.question.createMany({
+    data: [
+      {
+        id: "home",
+        question: "How do I track my order?",
+        answer: "You can track your order by clicking on the link in the email we sent you.",
+        order: 1,
+        published: true,
+      },
+      {
+        id: "home",
+        question: "How do I return an item?",
+        answer: "You can return an item by going to the return section of our website.",
+        order: 2,
+        published: false,
+      },
+      {
+        id: "home",
+        question: "Can I cancel my order?",
+        answer: "You can cancel your order by contacting us at our email.",
+        order: 3,
+        published: true,
       },
     ],
     skipDuplicates: true,
