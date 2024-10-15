@@ -1,7 +1,11 @@
+
+# docker-compose scale service-db=3
+
 services:
 
   service-db:
     image: postgres:13
+
     environment:
       POSTGRES_DB: cyva
       POSTGRES_USER: user
@@ -10,13 +14,22 @@ services:
     volumes:
       - ./Db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "8080"  # Internal container port
+      - "0:5432"  # Dynamically assign any available host port to container port 5432
 
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.myapp.rule=Host(`cyna.com`)" # Domain for your app
       - "traefik.http.routers.myapp.entrypoints=websecure"      # Redirect traffic to HTTPS
       - "traefik.http.routers.myapp.tls.certresolver=letsencrypt" # Enable Let's Encrypt
+      - "traefik.http.services.image-api.loadbalancer.server.port=8080"  # API container's exposed port
+
+      - "traefik.http.services.image-api.loadbalancer.sticky.cookie=true"
+      - "traefik.http.services.image-api.loadbalancer.sticky.cookie.name=mycookie"
+
+      - "traefik.http.services.image-api.loadbalancer.healthcheck.path=/health"
+      - "traefik.http.services.image-api.loadbalancer.healthcheck.interval=30s"
+
     networks:
       - web
 
@@ -42,4 +55,4 @@ services:
 
 networks:
   web:
-    external: true
+    driver: bridge
