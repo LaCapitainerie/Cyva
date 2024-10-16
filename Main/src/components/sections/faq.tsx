@@ -1,7 +1,7 @@
 import Section from "@/components/section";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { siteConfig } from "@/lib/config";
-import { FAQType } from "@/type/faq";
+import { FAQType } from "@/lib/types/faq";
 import { PrismaClient } from "@prisma/client";
 
 interface FAQProps {
