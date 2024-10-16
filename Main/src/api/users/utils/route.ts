@@ -1,10 +1,8 @@
-import { route } from "@/lib/safe-route";
+import { adminRoute, authRoute, route } from "@/lib/safe-route";
 import { UserSchema } from "@/lib/types/user";
 import { PrismaClient } from "@prisma/client";
 
-
 const prisma = new PrismaClient();
-
 
 export const POST = route
   .body(UserSchema)
@@ -34,9 +32,7 @@ export const POST = route
 
   });
 
-
-
-export const GET = route
+export const GET = adminRoute
   .handler(async () => {
 
     const users = await prisma.user.findMany();
@@ -45,25 +41,7 @@ export const GET = route
 
   });
 
-
-
-export const DELETE = route
-  .body(UserSchema)
-  .handler(async (req, { body }) => {
-
-    const user = await prisma.user.delete({
-      where: {
-        id: body.id,
-      },
-    });
-
-    return Response.json({ message: "User deleted" }, { status: 200 });
-
-  });
-
-
-
-export const PUT = route
+export const PUT = authRoute
   .body(UserSchema)
   .handler(async (req, { body }) => {
       
@@ -81,4 +59,18 @@ export const PUT = route
   
       return Response.json({ message: "User updated" }, { status: 200 });
   
+  });
+
+export const DELETE = adminRoute
+  .body(UserSchema)
+  .handler(async (req, { body }) => {
+
+    const user = await prisma.user.delete({
+      where: {
+        id: body.id,
+      },
     });
+
+    return Response.json({ message: "User deleted" }, { status: 200 });
+
+  });
