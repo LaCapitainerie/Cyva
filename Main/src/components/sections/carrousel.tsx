@@ -1,4 +1,4 @@
-import { CarrouselPartType } from "@/lib/types/carrousel";
+import { CarrouselPartType } from "@/types/carrousel";
 import { PrismaClient } from "@prisma/client";
 import { Emblacarousel } from "../magicui/caroussel";
 

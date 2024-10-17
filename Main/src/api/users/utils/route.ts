@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 import { route } from "@/lib/safe-route";
 import { UserSchema } from "@/lib/types/user";
+=======
+import { adminRoute, authRoute, route } from "@/lib/safe-route";
+import { UserSchema } from "@/types/user";
+>>>>>>> Stashed changes
 import { PrismaClient } from "@prisma/client";
 
 

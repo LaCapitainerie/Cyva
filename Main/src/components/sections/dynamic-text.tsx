@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import Section from "../section";
-import { DynamicTextType } from "@/lib/types/dynamicText";
+import { DynamicTextType } from "@/types/dynamicText";
 
 type DynamicTextProps = {
     id: DynamicTextType["id"];
