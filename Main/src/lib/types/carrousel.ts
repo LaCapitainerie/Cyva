@@ -13,7 +13,6 @@ export const CarrouselPartSchema = z.object({
 export type CarrouselPartType = z.infer<typeof CarrouselPartSchema>;
 
 export const CarrouselSchema = z.object({
-    id: z.number(),
     name: z.string(),
     parts: z.array(CarrouselPartSchema),
 });

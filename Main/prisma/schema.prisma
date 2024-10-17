@@ -47,4 +47,5 @@ model Question {
   answer      String
   order       Int
   published   Boolean
+  faqName     String
 }
