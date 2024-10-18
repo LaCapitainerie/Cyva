@@ -1,14 +1,20 @@
 import Section from "@/components/section";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { siteConfig } from "@/lib/config";
+import { FAQType } from "@/type/faq";
 import { PrismaClient } from "@prisma/client";
 
-export default async function FAQ() {
+interface FAQProps {
+  id: FAQType["id"];
+}
+
+export default async function FAQ({ id }: FAQProps) {
 
   const prisma = new PrismaClient();
 
   const faqs = await prisma.question.findMany({
     where: {
+      id: id,
       published: true,
     },
     orderBy: {

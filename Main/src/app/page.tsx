@@ -31,7 +31,7 @@ export default function Home() {
       <Features />
       <Testimonials />
       <Pricing />
-      <FAQ />
+      <FAQ id={"home"} />
       <Blog />
       <CTA />
       <Footer />
