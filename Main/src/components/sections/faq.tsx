@@ -1,13 +1,21 @@
 import Section from "@/components/section";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { siteConfig } from "@/lib/config";
+import { PrismaClient } from "@prisma/client";
 
-export default function FAQ() {
+export default async function FAQ() {
+
+  const prisma = new PrismaClient();
+
+  const faqs = await prisma.question.findMany({
+    where: {
+      published: true,
+    },
+    orderBy: {
+      order: 'asc',
+    },
+  });
+
   return (
     <Section title="FAQ" subtitle="Frequently asked questions">
       <div className="mx-auto my-12 md:max-w-[800px]">
@@ -16,7 +24,7 @@ export default function FAQ() {
           collapsible
           className="flex w-full flex-col items-center justify-center space-y-2"
         >
-          {siteConfig.faqs.map((faq, idx) => (
+          {faqs.map((faq, idx) => (
             <AccordionItem
               key={idx}
               value={faq.question}
