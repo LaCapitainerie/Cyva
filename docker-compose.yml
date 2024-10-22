@@ -1,6 +1,11 @@
+
+# docker-compose scale service-db=3
+
 services:
-  db:
+
+  service-db:
     image: postgres:13
+
     environment:
       POSTGRES_DB: cyva
       POSTGRES_USER: user
@@ -9,4 +14,45 @@ services:
     volumes:
       - ./Db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "8080"  # Internal container port
+      - "0:5432"  # Dynamically assign any available host port to container port 5432
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.myapp.rule=Host(`cyna.com`)" # Domain for your app
+      - "traefik.http.routers.myapp.entrypoints=websecure"      # Redirect traffic to HTTPS
+      - "traefik.http.routers.myapp.tls.certresolver=letsencrypt" # Enable Let's Encrypt
+      - "traefik.http.services.image-api.loadbalancer.server.port=8080"  # API container's exposed port
+
+      - "traefik.http.services.image-api.loadbalancer.sticky.cookie=true"
+      - "traefik.http.services.image-api.loadbalancer.sticky.cookie.name=mycookie"
+
+      - "traefik.http.services.image-api.loadbalancer.healthcheck.path=/health"
+      - "traefik.http.services.image-api.loadbalancer.healthcheck.interval=30s"
+
+    networks:
+      - web
+
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--api.insecure=true"                # API dashboard (disable for production)
+      - "--providers.docker=true"            # Enable Docker as a provider
+      - "--entryPoints.web.address=:80"      # HTTP entry point
+      - "--entryPoints.websecure.address=:443" # HTTPS entry point
+      - "--certificatesResolvers.letsencrypt.acme.email=hugo.antreassian@gmail.com" # Email for Let's Encrypt
+      - "--certificatesResolvers.letsencrypt.acme.storage=/letsencrypt/acme.json" # Storage for certs
+      - "--certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=web"  # Use HTTP challenge for certs
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"   # Enable communication with Docker
+      - "./letsencrypt:/letsencrypt"                  # Volume for Let's Encrypt cert storage
+    networks:
+      - web
+
+
+networks:
+  web:
+    driver: bridge
