@@ -1,3 +1,10 @@
+
+[Pagination](https://shadcn-next-link-pagination.vercel.app/?page=1&pageSize=25)
+[BackOffice](https://shadcnui-templates.com/template/next.js-starter-template-by-mickasmt)
+[Image Upload For Carrousel](https://image-upload-shadcn.vercel.app/)
+[CDN](https://dev.to/kevinanielsen/how-to-host-your-own-cdn-for-free-in-less-than-10-minutes-4l4h)
+[Graphs](https://grades.nstr.dev/)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
