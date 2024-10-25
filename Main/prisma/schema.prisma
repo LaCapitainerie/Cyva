@@ -20,6 +20,7 @@ model User {
   password  String
   token     String
   role      String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -32,6 +33,9 @@ model CarrouselPart {
   carrouselName String
   description   String
   order         Int
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model DynamicText {
@@ -39,12 +43,30 @@ model DynamicText {
   title       String
   subtitle    String
   description String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Question {
-  id          String @id
-  question    String
-  answer      String
-  order       Int
-  published   Boolean
+  id        String  @id
+  question  String
+  answer    String
+  order     Int
+  published Boolean
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id    Int    @id @default(autoincrement())
+  name  String
+  role   String
+  img  String
+  description  String
+  order Int
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

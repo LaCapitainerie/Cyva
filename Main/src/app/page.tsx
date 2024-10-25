@@ -12,8 +12,9 @@ import Logos from "@/components/sections/logos";
 import Pricing from "@/components/sections/pricing";
 import Problem from "@/components/sections/problem";
 import Solution from "@/components/sections/solution";
-import Testimonials from "@/components/sections/testimonials";
+import Testimonials from "@/components/magicui/testimonials";
 import TestimonialsCarousel from "@/components/sections/testimonials-carousel";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
 
 export default function Home() {
   return (
@@ -29,7 +30,7 @@ export default function Home() {
       <HowItWorks />
       <TestimonialsCarousel />
       <Features />
-      <Testimonials />
+      <TestimonialsSection />
       <Pricing />
       <FAQ id={"home"} />
       <Blog />
