@@ -1,0 +1,8 @@
+# Générer le client Prisma après avoir modifié le schéma
+npx prisma generate
+
+# Pousser les modifications du schéma Prisma vers la base de données
+npx prisma db push
+
+# Seed les données dans la db
+npm run seed
