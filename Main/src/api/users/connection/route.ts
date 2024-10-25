@@ -1,7 +1,7 @@
 import { route } from "@/lib/safe-route";
 import { PrismaClient } from "@prisma/client";
 import { generateToken } from "@/lib/jwt";
-import { UserSchema } from "@/lib/types/user";
+import { UserSchema } from "@/types/user";
 
 
 const prisma = new PrismaClient();

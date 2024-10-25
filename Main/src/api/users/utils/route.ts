@@ -1,5 +1,5 @@
 import { route } from "@/lib/safe-route";
-import { UserSchema } from "@/lib/types/user";
+import { UserSchema } from "@/types/user";
 import { PrismaClient } from "@prisma/client";
 
 
