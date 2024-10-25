@@ -2,7 +2,7 @@ import Author from "@/components/blog-author";
 import CtaSection from "@/components/sections/cta";
 import { getPost } from "@/lib/blog";
 import { siteConfig } from "@/lib/config";
-import { formatDate } from "@/lib/utils";
+import { formatDate } from "@/utils";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";

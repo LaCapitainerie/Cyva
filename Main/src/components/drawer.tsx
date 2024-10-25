@@ -8,7 +8,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { siteConfig } from "@/lib/config";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import Link from "next/link";
 import { IoMenuSharp } from "react-icons/io5";
 

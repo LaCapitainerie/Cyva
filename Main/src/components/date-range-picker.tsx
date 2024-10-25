@@ -6,7 +6,7 @@ import { format } from "date-fns"
 import { parseAsString, useQueryStates } from "nuqs"
 import { type DateRange } from "react-day-picker"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils"
 import { Button, type ButtonProps } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {

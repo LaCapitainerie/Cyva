@@ -9,8 +9,8 @@ import { DataTableAdvancedToolbar } from "@/components/data-table/data-table-adv
 import { DataTableToolbar } from "@/components/data-table/data-table-toolbar"
 
 import { useFeatureFlags } from "./feature-flags-provider"
-import { getColumns } from "./tasks-table-columns"
-import { TasksTableFloatingBar } from "./tasks-table-floating-bar"
+import { getCarrouselColumns } from "./carrousel-table-columns"
+import { ItemsTableFloatingBar } from "./unstable_items-table-floating-bar"
 import { TasksTableToolbarActions } from "./tasks-table-toolbar-actions"
 
 interface TasksTableProps<Type> {
@@ -20,10 +20,10 @@ interface TasksTableProps<Type> {
   advancedFilterFields: DataTableAdvancedFilterField<Type>[],
 }
 
-export function TasksTable<Type extends { id?: number }>({ data, pageCount, filterFields, advancedFilterFields }: TasksTableProps<Type>) {
+export function ItemsTable<Type extends { id?: number }>({ data, pageCount, filterFields, advancedFilterFields }: TasksTableProps<Type>) {
   const { featureFlags } = useFeatureFlags()
 
-  const columns = React.useMemo(() => getColumns(), [])
+  const columns = React.useMemo(() => getCarrouselColumns<Type>(), [])
 
   const advancedFilter = featureFlags.includes("advancedFilter")
   const floatingBar = featureFlags.includes("floatingBar")
@@ -46,7 +46,7 @@ export function TasksTable<Type extends { id?: number }>({ data, pageCount, filt
   return (
     <DataTable
       table={table}
-      floatingBar={floatingBar ? <TasksTableFloatingBar table={table} /> : null}
+      floatingBar={floatingBar ? <ItemsTableFloatingBar table={table} /> : null}
     >
       {advancedFilter ? (
         <DataTableAdvancedToolbar

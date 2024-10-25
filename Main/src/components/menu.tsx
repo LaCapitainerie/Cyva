@@ -13,7 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { siteConfig } from "@/lib/config";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 
 export default function NavigationMenuDemo() {
   return (

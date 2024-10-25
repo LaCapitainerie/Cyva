@@ -12,7 +12,7 @@ import { parseAsStringEnum, useQueryState } from "nuqs"
 
 import { dataTableConfig } from "@/config/data-table"
 import { getDefaultFilterOperator, getFilterOperators } from "@/lib/data-table"
-import { cn, formatDate } from "@/lib/utils"
+import { cn, formatDate } from "@/utils"
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"

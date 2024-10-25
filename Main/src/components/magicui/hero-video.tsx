@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Play, XIcon } from "lucide-react";
 import Image from "next/image";

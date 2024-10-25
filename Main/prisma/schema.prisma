@@ -39,7 +39,7 @@ model CarrouselPart {
 }
 
 model DynamicText {
-  id          String @id
+  id          Int @id
   title       String
   subtitle    String
   description String
@@ -49,7 +49,7 @@ model DynamicText {
 }
 
 model Question {
-  id        String  @id
+  id        Int  @id
   question  String
   answer    String
   order     Int

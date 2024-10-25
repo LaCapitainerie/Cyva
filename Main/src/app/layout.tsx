@@ -1,7 +1,7 @@
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { cn, constructMetadata } from "@/lib/utils";
+import { cn, constructMetadata } from "@/utils";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";

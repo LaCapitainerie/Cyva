@@ -1,13 +1,5 @@
 import * as React from "react"
-import { tasks, type Task } from "@/db/schema"
-import {
-  ArrowUpIcon,
-  CheckCircledIcon,
-  Cross2Icon,
-  DownloadIcon,
-  ReloadIcon,
-  TrashIcon,
-} from "@radix-ui/react-icons"
+import { ArrowUpIcon, CheckCircleIcon, CrossIcon, DownloadIcon, LoaderIcon, TrashIcon } from "lucide-react"
 import { SelectTrigger } from "@radix-ui/react-select"
 import { type Table } from "@tanstack/react-table"
 import { toast } from "sonner"
@@ -15,27 +7,16 @@ import { toast } from "sonner"
 import { exportTableToCSV } from "@/lib/export"
 import { Button } from "@/components/ui/button"
 import { Portal } from "@/components/ui/portal"
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-} from "@/components/ui/select"
+import { Select, SelectContent, SelectGroup, SelectItem } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { Kbd } from "@/components/kbd"
 
-import { deleteTasks, updateTasks } from "../_lib/actions"
-
-interface TasksTableFloatingBarProps {
-  table: Table<Task>
+interface ItemsTableFloatingBarProps<DataType> {
+  table: Table<DataType>
 }
 
-export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
+export function ItemsTableFloatingBar<DataType>({ table }: ItemsTableFloatingBarProps<DataType>) {
   const rows = table.getFilteredSelectedRowModel().rows
 
   const [isPending, startTransition] = React.useTransition()
@@ -73,7 +54,7 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                     className="size-5 hover:border"
                     onClick={() => table.toggleAllRowsSelected(false)}
                   >
-                    <Cross2Icon
+                    <CrossIcon
                       className="size-3.5 shrink-0"
                       aria-hidden="true"
                     />
@@ -88,16 +69,18 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
               </Tooltip>
             </div>
             <Separator orientation="vertical" className="hidden h-5 sm:block" />
-            <div className="flex items-center gap-1.5">
+            {/* <div className="flex items-center gap-1.5">
               <Select
-                onValueChange={(value: Task["status"]) => {
+                onValueChange={(value: DataType["status"]) => {
                   setAction("update-status")
 
                   startTransition(async () => {
-                    const { error } = await updateTasks({
-                      ids: rows.map((row) => row.original.id),
-                      status: value,
-                    })
+                    const error = "Not implemented"
+                    // TODO: Implement updateTasks
+                    // const { error } = await updateTasks({
+                    //   ids: rows.map((row) => row.original.id),
+                    //   status: value,
+                    // })
 
                     if (error) {
                       toast.error(error)
@@ -118,12 +101,12 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                         disabled={isPending}
                       >
                         {isPending && action === "update-status" ? (
-                          <ReloadIcon
+                          <LoaderIcon
                             className="size-3.5 animate-spin"
                             aria-hidden="true"
                           />
                         ) : (
-                          <CheckCircledIcon
+                          <CheckCircleIcon
                             className="size-3.5"
                             aria-hidden="true"
                           />
@@ -135,7 +118,9 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                     <p>Update status</p>
                   </TooltipContent>
                 </Tooltip>
+                
                 <SelectContent align="center">
+                  // TODO: Implement select group
                   <SelectGroup>
                     {tasks.status.enumValues.map((status) => (
                       <SelectItem
@@ -150,7 +135,7 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                 </SelectContent>
               </Select>
               <Select
-                onValueChange={(value: Task["priority"]) => {
+                onValueChange={(value: DataType["priority"]) => {
                   setAction("update-priority")
 
                   startTransition(async () => {
@@ -178,7 +163,7 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                         disabled={isPending}
                       >
                         {isPending && action === "update-priority" ? (
-                          <ReloadIcon
+                          <LoaderIcon
                             className="size-3.5 animate-spin"
                             aria-hidden="true"
                           />
@@ -228,7 +213,7 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                     disabled={isPending}
                   >
                     {isPending && action === "export" ? (
-                      <ReloadIcon
+                      <LoaderIcon
                         className="size-3.5 animate-spin"
                         aria-hidden="true"
                       />
@@ -251,9 +236,11 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                       setAction("delete")
 
                       startTransition(async () => {
-                        const { error } = await deleteTasks({
-                          ids: rows.map((row) => row.original.id),
-                        })
+                        const error = "Not implemented"
+                        // TODO: Implement deleteTasks
+                        // const { error } = await deleteTasks({
+                        //   ids: rows.map((row) => row.original.id),
+                        // })
 
                         if (error) {
                           toast.error(error)
@@ -266,7 +253,7 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                     disabled={isPending}
                   >
                     {isPending && action === "delete" ? (
-                      <ReloadIcon
+                      <LoaderIcon
                         className="size-3.5 animate-spin"
                         aria-hidden="true"
                       />
@@ -279,7 +266,7 @@ export function TasksTableFloatingBar({ table }: TasksTableFloatingBarProps) {
                   <p>Delete tasks</p>
                 </TooltipContent>
               </Tooltip>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import type { DataTableFilterField } from "@/types"
 import { Cross2Icon } from "@radix-ui/react-icons"
 import type { Table } from "@tanstack/react-table"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DataTableFacetedFilter } from "@/components/data-table/data-table-faceted-filter"

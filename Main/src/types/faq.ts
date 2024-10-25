@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const FAQSchema = z.object({
-    id: z.string(),
+    id: z.number(),
     question: z.string(),
     answer: z.string(),
     order: z.number(),

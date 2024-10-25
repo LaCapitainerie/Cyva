@@ -1,5 +1,5 @@
 import { Post } from "@/lib/blog";
-import { formatDate } from "@/lib/utils";
+import { formatDate } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 

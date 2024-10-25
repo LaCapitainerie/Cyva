@@ -4,7 +4,7 @@ import * as React from "react"
 import type { DataTableAdvancedFilterField } from "@/types"
 import type { Table } from "@tanstack/react-table"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils"
 import { DataTableFilterList } from "@/components/data-table/data-table-filter-list"
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options"
 

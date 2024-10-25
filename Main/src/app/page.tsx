@@ -12,7 +12,6 @@ import Logos from "@/components/sections/logos";
 import Pricing from "@/components/sections/pricing";
 import Problem from "@/components/sections/problem";
 import Solution from "@/components/sections/solution";
-import Testimonials from "@/components/magicui/testimonials";
 import TestimonialsCarousel from "@/components/sections/testimonials-carousel";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 
@@ -22,7 +21,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Logos />
-      <DynamicSection id="home">
+      <DynamicSection id={1}>
         <Carrousel name="home" />
       </DynamicSection>
       <Problem />
@@ -32,7 +31,7 @@ export default function Home() {
       <Features />
       <TestimonialsSection />
       <Pricing />
-      <FAQ id={"home"} />
+      <FAQ id={1} />
       <Blog />
       <CTA />
       <Footer />

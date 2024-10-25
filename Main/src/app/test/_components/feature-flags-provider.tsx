@@ -5,11 +5,7 @@ import { useQueryState } from "nuqs"
 
 import { dataTableConfig, type DataTableConfig } from "@/config/data-table"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 type FeatureFlagValue = DataTableConfig["featureFlags"][number]["value"]
 

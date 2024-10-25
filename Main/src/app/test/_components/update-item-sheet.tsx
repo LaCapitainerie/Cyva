@@ -1,76 +1,46 @@
 "use client"
 
 import * as React from "react"
-import { tasks, type Task } from "@/db/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
+import { z } from "zod"
 
-import { updateTask } from "../_lib/actions"
-import { updateTaskSchema, type UpdateTaskSchema } from "../_lib/validations"
-
-interface UpdateTaskSheetProps
+interface UpdateItemSheetProps<DataType>
   extends React.ComponentPropsWithRef<typeof Sheet> {
-  task: Task
+  schema: z.ZodObject<any, any>
+  item: DataType
 }
 
-export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
+export function UpdateItemSheet<DataType>({ schema, item, ...props }: UpdateItemSheetProps<DataType>) {
   const [isUpdatePending, startUpdateTransition] = React.useTransition()
 
-  const form = useForm<UpdateTaskSchema>({
-    resolver: zodResolver(updateTaskSchema),
-    defaultValues: {
-      title: task.title ?? "",
-      label: task.label,
-      status: task.status,
-      priority: task.priority,
-    },
+  type DataTypeSchema = z.infer<typeof schema>
+
+  const form = useForm<DataTypeSchema>({
+    resolver: zodResolver(schema),
+    defaultValues: {},
   })
 
   React.useEffect(() => {
-    form.reset({
-      title: task.title ?? "",
-      label: task.label,
-      status: task.status,
-      priority: task.priority,
-    })
-  }, [task, form])
+    form.reset({})
+  }, [form])
 
-  function onSubmit(input: UpdateTaskSchema) {
+  function onSubmit(input: DataTypeSchema) {
     startUpdateTransition(async () => {
-      const { error } = await updateTask({
-        id: task.id,
-        ...input,
-      })
+      const error = "Not implemented"
+      // TODO: Implement updateItem
+      // const { error } = await updateTask({
+      //   id: task.id,
+      //   ...input,
+      // })
 
       if (error) {
         toast.error(error)
@@ -130,7 +100,7 @@ export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectGroup>
+                      {/* <SelectGroup>
                         {tasks.label.enumValues.map((item) => (
                           <SelectItem
                             key={item}
@@ -140,7 +110,7 @@ export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
                             {item}
                           </SelectItem>
                         ))}
-                      </SelectGroup>
+                      </SelectGroup> */}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -163,7 +133,7 @@ export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectGroup>
+                      {/* <SelectGroup>
                         {tasks.status.enumValues.map((item) => (
                           <SelectItem
                             key={item}
@@ -173,7 +143,7 @@ export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
                             {item}
                           </SelectItem>
                         ))}
-                      </SelectGroup>
+                      </SelectGroup> */}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -196,7 +166,7 @@ export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectGroup>
+                      {/* <SelectGroup>
                         {tasks.priority.enumValues.map((item) => (
                           <SelectItem
                             key={item}
@@ -206,7 +176,7 @@ export function UpdateTaskSheet({ task, ...props }: UpdateTaskSheetProps) {
                             {item}
                           </SelectItem>
                         ))}
-                      </SelectGroup>
+                      </SelectGroup> */}
                     </SelectContent>
                   </Select>
                   <FormMessage />

@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { siteConfig } from "@/lib/config";
 import useWindowSize from "@/hooks/use-window-size";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import Link from "next/link";

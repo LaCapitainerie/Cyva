@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Icons } from "@/components/icons";
 import HeroVideoDialog from "@/components/magicui/hero-video";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import Link from "next/link";
 
 const ease = [0.16, 1, 0.3, 1];

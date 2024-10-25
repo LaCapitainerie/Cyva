@@ -11,14 +11,14 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { Icons } from "@/components/icons"
 
-interface DeleteItemsDialogProps<DataType extends { id?: string }>
+interface DeleteItemsDialogProps<DataType extends { id?: number }>
   extends React.ComponentPropsWithoutRef<typeof Dialog> {
   Items: Row<DataType>["original"][]
   showTrigger?: boolean
   onSuccess?: () => void
 }
 
-export function DeleteItemsDialog<DataType extends { id?: string }>({
+export function DeleteItemsDialog<DataType extends { id?: number }>({
   Items,
   showTrigger = true,
   onSuccess,

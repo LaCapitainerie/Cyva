@@ -39,6 +39,7 @@
     "next": "14.2.7",
     "next-themes": "^0.3.0",
     "next-zod-route": "^0.0.11",
+    "nuqs": "^2.0.4",
     "prisma": "^5.21.0",
     "react": "^18.3.1",
     "react-day-picker": "8.10.1",

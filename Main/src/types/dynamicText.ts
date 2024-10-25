@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const DynamicTextSchema = z.object({
-    id: z.string(),
+    id: z.number(),
     title: z.string(),
     subtitle: z.string(),
     description: z.string(),
