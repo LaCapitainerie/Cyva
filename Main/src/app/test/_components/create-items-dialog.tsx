@@ -3,7 +3,7 @@
 import * as React from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PlusIcon } from "lucide-react"
-import { useForm } from "react-hook-form"
+import { FieldValues, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { useMediaQuery } from "@/hooks/use-media-query"
@@ -12,22 +12,29 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { Icons } from "@/components/icons"
 
-import { createTask } from "../../_lib/actions"
-import { createTaskSchema, type CreateTaskSchema } from "../../_lib/validations"
-import { CreateCarrouselForm } from "./create-carrousel-form"
+import { CreateItemsForm } from "./create-items-form"
+import { z } from "zod"
 
-export function CreateCarrouselDialog() {
+interface CreateItemsDialogProps {
+  schema: z.ZodObject<any, any>
+}
+
+export function CreateItemsDialog({ schema }: CreateItemsDialogProps) {
   const [open, setOpen] = React.useState(false)
   const [isCreatePending, startCreateTransition] = React.useTransition()
   const isDesktop = useMediaQuery("(min-width: 640px)")
 
-  const form = useForm<CreateTaskSchema>({
-    resolver: zodResolver(createTaskSchema),
+  type DataType = z.infer<typeof schema>
+
+  const form = useForm<DataType>({
+    resolver: zodResolver(schema),
   })
 
-  function onSubmit(input: CreateTaskSchema) {
+  function onSubmit(input: DataType) {
     startCreateTransition(async () => {
-      const { error } = await createTask(input)
+      const error = "Not implemented"
+      // TODO: Implement createTask
+      // const { error } = await createTask(input)
 
       if (error) {
         toast.error(error)
@@ -36,7 +43,7 @@ export function CreateCarrouselDialog() {
 
       form.reset()
       setOpen(false)
-      toast.success("Task created")
+      toast.success("Items created")
     })
   }
 
@@ -46,17 +53,17 @@ export function CreateCarrouselDialog() {
         <DialogTrigger asChild>
           <Button variant="outline" size="sm">
             <PlusIcon className="mr-2 size-4" aria-hidden="true" />
-            New task
+            New item
           </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Create task</DialogTitle>
+            <DialogTitle>Create item</DialogTitle>
             <DialogDescription>
-              Fill in the details below to create a new task.
+              Fill in the details below to create a new item.
             </DialogDescription>
           </DialogHeader>
-          <CreateForm form={form} onSubmit={onSubmit}>
+          <CreateItemsForm form={form} onSubmit={onSubmit}>
             <DialogFooter className="gap-2 pt-2 sm:space-x-0">
               <DialogClose asChild>
                 <Button type="button" variant="outline">
@@ -73,7 +80,7 @@ export function CreateCarrouselDialog() {
                 Create
               </Button>
             </DialogFooter>
-          </CreateTaskForm>
+          </CreateItemsForm>
         </DialogContent>
       </Dialog>
     )
@@ -83,15 +90,15 @@ export function CreateCarrouselDialog() {
       <DrawerTrigger asChild>
         <Button variant="outline" size="sm">
           <PlusIcon className="mr-2 size-4" aria-hidden="true" />
-          New task
+          New item
         </Button>
       </DrawerTrigger>
 
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Create task</DrawerTitle>
+          <DrawerTitle>Create item</DrawerTitle>
           <DrawerDescription>
-            Fill in the details below to create a new task.
+            Fill in the details below to create a new item.
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="gap-2 sm:space-x-0">

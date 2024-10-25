@@ -7,8 +7,8 @@ import { type Table } from "@tanstack/react-table"
 import { exportTableToCSV } from "@/lib/export"
 import { Button } from "@/components/ui/button"
 
-import { CreateTaskDialog } from "./carrousel/create-task-dialog"
-import { DeleteTasksDialog } from "./delete-tasks-dialog"
+import { CreateTaskDialog } from "./create-items-dialog"
+import { DeleteTasksDialog } from "./delete-items-dialog"
 
 interface TasksTableToolbarActionsProps {
   table: Table<Task>

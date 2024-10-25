@@ -1,24 +1,23 @@
 "use client"
 
 import * as React from "react"
-import { type UseFormReturn } from "react-hook-form"
+import { FieldValues, Path, type UseFormReturn } from "react-hook-form"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Textarea } from "@/components/ui/textarea"
-import { CarrouselPartType } from "@/types/carrousel"
 
-interface CreateFormProps
+interface CreateFormProps<DataType extends FieldValues>
   extends Omit<React.ComponentPropsWithRef<"form">, "onSubmit"> {
   children: React.ReactNode
-  form: UseFormReturn<CarrouselPartType>
-  onSubmit: (data: CarrouselPartType) => void
+  form: UseFormReturn<DataType>
+  onSubmit: (data: DataType) => void
 }
 
-export function CreateCarrouselForm({
+export function CreateItemsForm<DataType extends FieldValues>({
   form,
   onSubmit,
   children,
-}: CreateFormProps) {
+}: CreateFormProps<DataType>) {
   return (
     <Form {...form}>
       <form
@@ -27,7 +26,7 @@ export function CreateCarrouselForm({
       >
         <FormField
           control={form.control}
-          name="title"
+          name={"title" as Path<DataType>}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Title</FormLabel>

@@ -1,58 +1,39 @@
 "use client"
 
 import * as React from "react"
-import { type Task } from "@/db/schema"
-import { TrashIcon } from "@radix-ui/react-icons"
+import { TrashIcon } from "lucide-react"
 import { type Row } from "@tanstack/react-table"
 import { toast } from "sonner"
 
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { Icons } from "@/components/icons"
 
-import { deleteTasks } from "../_lib/actions"
-
-interface DeleteTasksDialogProps
+interface DeleteItemsDialogProps<DataType extends { id?: string }>
   extends React.ComponentPropsWithoutRef<typeof Dialog> {
-  tasks: Row<Task>["original"][]
+  Items: Row<DataType>["original"][]
   showTrigger?: boolean
   onSuccess?: () => void
 }
 
-export function DeleteTasksDialog({
-  tasks,
+export function DeleteItemsDialog<DataType extends { id?: string }>({
+  Items,
   showTrigger = true,
   onSuccess,
   ...props
-}: DeleteTasksDialogProps) {
+}: DeleteItemsDialogProps<DataType>) {
   const [isDeletePending, startDeleteTransition] = React.useTransition()
   const isDesktop = useMediaQuery("(min-width: 640px)")
 
   function onDelete() {
     startDeleteTransition(async () => {
-      const { error } = await deleteTasks({
-        ids: tasks.map((task) => task.id),
-      })
+      const error = "Not implemented";
+      // TODO: Implement deleteItems
+      // const { error } = await deleteItems({
+      //   ids: Items.map((Item) => Item.id),
+      // })
 
       if (error) {
         toast.error(error)
@@ -60,7 +41,7 @@ export function DeleteTasksDialog({
       }
 
       props.onOpenChange?.(false)
-      toast.success("Tasks deleted")
+      toast.success("Items deleted")
       onSuccess?.()
     })
   }
@@ -72,7 +53,7 @@ export function DeleteTasksDialog({
           <DialogTrigger asChild>
             <Button variant="outline" size="sm">
               <TrashIcon className="mr-2 size-4" aria-hidden="true" />
-              Delete ({tasks.length})
+              Delete ({Items.length})
             </Button>
           </DialogTrigger>
         ) : null}
@@ -81,8 +62,8 @@ export function DeleteTasksDialog({
             <DialogTitle>Are you absolutely sure?</DialogTitle>
             <DialogDescription>
               This action cannot be undone. This will permanently delete your{" "}
-              <span className="font-medium">{tasks.length}</span>
-              {tasks.length === 1 ? " task" : " tasks"} from our servers.
+              <span className="font-medium">{Items.length}</span>
+              {Items.length === 1 ? " Item" : " Items"} from our servers.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="gap-2 sm:space-x-0">
@@ -115,7 +96,7 @@ export function DeleteTasksDialog({
         <DrawerTrigger asChild>
           <Button variant="outline" size="sm">
             <TrashIcon className="mr-2 size-4" aria-hidden="true" />
-            Delete ({tasks.length})
+            Delete ({Items.length})
           </Button>
         </DrawerTrigger>
       ) : null}
@@ -124,8 +105,8 @@ export function DeleteTasksDialog({
           <DrawerTitle>Are you absolutely sure?</DrawerTitle>
           <DrawerDescription>
             This action cannot be undone. This will permanently delete your{" "}
-            <span className="font-medium">{tasks.length}</span>
-            {tasks.length === 1 ? " task" : " tasks"} from our servers.
+            <span className="font-medium">{Items.length}</span>
+            {Items.length === 1 ? " Item" : " Items"} from our servers.
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="gap-2 sm:space-x-0">
