@@ -46,6 +46,11 @@ export default async function IndexPage(props: IndexPageProps) {
       label: "Title",
       placeholder: "Filter titles...",
     },
+    {
+      id: "carrouselName",
+      label: "Carrousel Name",
+      placeholder: "Filter Carrousel Name...",
+    }
     // {
     //   id: "carrouselName",
     //   label: "Part Name",
@@ -88,33 +93,33 @@ export default async function IndexPage(props: IndexPageProps) {
       type: "text",
       placeholder: "Filter titles...",
     },
-    {
-      id: "status",
-      label: "Status",
-      type: "multi-select",
-      options: tasks.status.enumValues.map((status) => ({
-        label: status[0]?.toUpperCase() + status.slice(1),
-        value: status,
-        icon: getStatusIcon(status),
-        count: statusCounts[status],
-      })),
-    },
-    {
-      id: "priority",
-      label: "Priority",
-      type: "multi-select",
-      options: tasks.priority.enumValues.map((priority) => ({
-        label: priority[0]?.toUpperCase() + priority.slice(1),
-        value: priority,
-        icon: getPriorityIcon(priority),
-        count: priorityCounts[priority],
-      })),
-    },
-    {
-      id: "createdAt",
-      label: "Created At",
-      type: "date",
-    },
+    // {
+    //   id: "status",
+    //   label: "Status",
+    //   type: "multi-select",
+    //   options: tasks.status.enumValues.map((status) => ({
+    //     label: status[0]?.toUpperCase() + status.slice(1),
+    //     value: status,
+    //     icon: getStatusIcon(status),
+    //     count: statusCounts[status],
+    //   })),
+    // },
+    // {
+    //   id: "priority",
+    //   label: "Priority",
+    //   type: "multi-select",
+    //   options: tasks.priority.enumValues.map((priority) => ({
+    //     label: priority[0]?.toUpperCase() + priority.slice(1),
+    //     value: priority,
+    //     icon: getPriorityIcon(priority),
+    //     count: priorityCounts[priority],
+    //   })),
+    // },
+    // {
+    //   id: "createdAt",
+    //   label: "Created At",
+    //   type: "date",
+    // },
   ]
 
 
@@ -125,7 +130,6 @@ export default async function IndexPage(props: IndexPageProps) {
           <DateRangePicker
             triggerSize="sm"
             triggerClassName="ml-auto w-56 sm:w-60"
-            align="end"
             shallow={false}
           />
         </React.Suspense>
@@ -140,7 +144,7 @@ export default async function IndexPage(props: IndexPageProps) {
             />
           }
         >
-          <TasksTable<String> promises={promises} filterFields={[]} />
+          <TasksTable<CarrouselPartType> data={CarrouselParts} pageCount={1} filterFields={filterFields} advancedFilterFields={[]} />
         </React.Suspense>
       </FeatureFlagsProvider>
     </Shell>

@@ -8,29 +8,20 @@ import { DataTable } from "@/components/data-table/data-table"
 import { DataTableAdvancedToolbar } from "@/components/data-table/data-table-advanced-toolbar"
 import { DataTableToolbar } from "@/components/data-table/data-table-toolbar"
 
-import type { getTaskPriorityCounts, getTasks, getTaskStatusCounts } from "../_lib/queries"
 import { useFeatureFlags } from "./feature-flags-provider"
 import { getColumns } from "./tasks-table-columns"
 import { TasksTableFloatingBar } from "./tasks-table-floating-bar"
 import { TasksTableToolbarActions } from "./tasks-table-toolbar-actions"
 
 interface TasksTableProps<Type> {
-  promises: Promise<
-    [
-      Awaited<ReturnType<typeof getTasks>>,
-      Awaited<ReturnType<typeof getTaskStatusCounts>>,
-      Awaited<ReturnType<typeof getTaskPriorityCounts>>,
-    ]
-  >,
-
+  data: Type[],
+  pageCount: number,
   filterFields: DataTableFilterField<Type>[],
   advancedFilterFields: DataTableAdvancedFilterField<Type>[],
 }
 
-export function TasksTable<Type extends { id?: string }>({ promises, filterFields, advancedFilterFields }: TasksTableProps<Type>) {
+export function TasksTable<Type extends { id?: number }>({ data, pageCount, filterFields, advancedFilterFields }: TasksTableProps<Type>) {
   const { featureFlags } = useFeatureFlags()
-
-  const [{ data, pageCount }, statusCounts, priorityCounts] = React.use(promises)
 
   const columns = React.useMemo(() => getColumns(), [])
 

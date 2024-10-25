@@ -7,6 +7,7 @@ export const UserSchema = z.object({
   password: z.string().min(8),
   token: z.string(),
   role: z.enum(["admin", "user"]),
+  
   createdAt: z.string(),
   updatedAt: z.string(),
 });

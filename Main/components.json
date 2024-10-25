@@ -15,6 +15,7 @@
     "utils": "@/utils",
     "types": "@/types",
     "hooks": "@/hooks",
-    "config": "@/config"
+    "config": "@/config",
+    "app": "@/app"
   }
 }

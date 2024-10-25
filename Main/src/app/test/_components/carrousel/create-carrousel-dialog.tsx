@@ -2,39 +2,21 @@
 
 import * as React from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { PlusIcon } from "@radix-ui/react-icons"
+import { PlusIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import { Icons } from "@/components/icons"
 
-import { createTask } from "../_lib/actions"
-import { createTaskSchema, type CreateTaskSchema } from "../_lib/validations"
-import { CreateTaskForm } from "./create-task-form"
+import { createTask } from "../../_lib/actions"
+import { createTaskSchema, type CreateTaskSchema } from "../../_lib/validations"
+import { CreateCarrouselForm } from "./create-carrousel-form"
 
-export function CreateTaskDialog() {
+export function CreateCarrouselDialog() {
   const [open, setOpen] = React.useState(false)
   const [isCreatePending, startCreateTransition] = React.useTransition()
   const isDesktop = useMediaQuery("(min-width: 640px)")
@@ -74,7 +56,7 @@ export function CreateTaskDialog() {
               Fill in the details below to create a new task.
             </DialogDescription>
           </DialogHeader>
-          <CreateTaskForm form={form} onSubmit={onSubmit}>
+          <CreateForm form={form} onSubmit={onSubmit}>
             <DialogFooter className="gap-2 pt-2 sm:space-x-0">
               <DialogClose asChild>
                 <Button type="button" variant="outline">

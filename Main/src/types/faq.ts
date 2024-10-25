@@ -6,6 +6,9 @@ export const FAQSchema = z.object({
     answer: z.string(),
     order: z.number(),
     published: z.boolean(),
+
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
 })
 
 export type FAQType = z.infer<typeof FAQSchema>
